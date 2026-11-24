@@ -1,0 +1,7 @@
+.DS_Store
+.godot/
+*.import
+*.blend1
+godot/materials/deer-rig-backup.blend
+godot/materials/deer-rig-graze-rework.blend
+godot/materials/deer-rig-walk-rework.blend

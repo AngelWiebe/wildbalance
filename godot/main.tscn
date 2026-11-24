@@ -1,0 +1,202 @@
+[gd_scene format=3 uid="uid://c2t4inu4r52ue"]
+
+[ext_resource type="Script" uid="uid://ethddvaexewl" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://5ijas23xlneo" path="res://scripts/forest.gd" id="2_forest"]
+[ext_resource type="Script" uid="uid://il0x0i3mtqj8" path="res://scripts/lookout.gd" id="3_lookout"]
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMaterial"]
+sky_top_color = Color(0.25, 0.4, 0.54, 1)
+sky_horizon_color = Color(0.73, 0.77, 0.68, 1)
+ground_bottom_color = Color(0.19, 0.22, 0.17, 1)
+ground_horizon_color = Color(0.73, 0.77, 0.68, 1)
+sun_angle_max = 16.0
+
+[sub_resource type="Sky" id="Sky"]
+sky_material = SubResource("SkyMaterial")
+
+[sub_resource type="Environment" id="Environment"]
+background_mode = 2
+sky = SubResource("Sky")
+ambient_light_source = 3
+ambient_light_color = Color(0.69, 0.78, 0.86, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 3
+ssao_enabled = true
+ssao_radius = 1.7
+ssao_intensity = 1.3
+fog_enabled = true
+fog_light_color = Color(0.66, 0.72, 0.64, 1)
+fog_sun_scatter = 0.2
+fog_density = 0.008
+
+[node name="WildBalance" type="Node3D" unique_id=1672294359]
+script = ExtResource("1_main")
+
+[node name="Forest" type="Node3D" parent="." unique_id=2074564181]
+script = ExtResource("2_forest")
+
+[node name="Atmosphere" type="WorldEnvironment" parent="." unique_id=941967425]
+environment = SubResource("Environment")
+
+[node name="LateAfternoonSun" type="DirectionalLight3D" parent="." unique_id=708378022]
+transform = Transform3D(0.7771459, 0.36990523, -0.5091309, 0, 0.809017, 0.58778524, 0.6293204, -0.45679492, 0.6287243, 0, 0, 0)
+light_color = Color(1, 0.86, 0.67, 1)
+light_energy = 1.31
+shadow_enabled = true
+directional_shadow_max_distance = 65.0
+
+[node name="Lookout" type="Camera3D" parent="." unique_id=1051421040]
+current = true
+fov = 58.0
+far = 150.0
+script = ExtResource("3_lookout")
+
+[node name="Overlay" type="CanvasLayer" parent="." unique_id=49606360]
+
+[node name="Location" type="Label" parent="Overlay" unique_id=822116205]
+offset_left = 29.0
+offset_top = 23.0
+theme_override_colors/font_color = Color(0.94, 0.92, 0.83, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.08, 0.06, 0.85)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 24
+text = "WildBalance"
+
+[node name="HudPanel" type="ColorRect" parent="Overlay" unique_id=486306147]
+z_index = -1
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 598.0
+offset_bottom = 242.0
+mouse_filter = 2
+color = Color(0.025, 0.045, 0.035, 0.78)
+
+[node name="SeasonReport" type="Label" parent="Overlay" unique_id=944832701]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -275.0
+offset_top = -92.0
+offset_right = 275.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.74, 1)
+theme_override_colors/font_outline_color = Color(0.02, 0.03, 0.02, 0.95)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+visible = false
+
+[node name="SimulationStatus" type="Label" parent="Overlay" unique_id=164340718]
+unique_name_in_owner = true
+offset_left = 31.0
+offset_top = 58.0
+offset_right = 582.0
+theme_override_colors/font_color = Color(0.93, 0.95, 0.84, 1)
+theme_override_colors/font_outline_color = Color(0.01, 0.02, 0.015, 0.9)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 14
+text = "FOREST PREVIEW  /  WAITING FOR GO"
+
+[node name="MeadowStatus" type="Label" parent="Overlay" unique_id=211693460]
+unique_name_in_owner = true
+offset_left = 31.0
+offset_top = 164.0
+offset_right = 582.0
+theme_override_colors/font_color = Color(0.78, 0.9, 0.68, 1)
+theme_override_colors/font_outline_color = Color(0.01, 0.02, 0.015, 0.9)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 14
+text = "MEADOW HEALTH  /  WAITING FOR GO"
+
+[node name="Controls" type="Label" parent="Overlay" unique_id=209585775]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 31.0
+offset_top = -43.0
+offset_bottom = -19.0
+theme_override_colors/font_color = Color(0.94, 0.92, 0.83, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.08, 0.06, 0.85)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 15
+text = "WASD Pan  •  V Free-fly  •  Right drag Look  •  Scroll Zoom/speed  •  1–8 Reseed  •  −/= Deer  •  [/] Wolves  •  Q Wolf call  •  F Follow  •  R Reset  •  H HUD"
+
+[node name="StartScreen" type="Control" parent="Overlay" unique_id=834510297]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Shade" type="ColorRect" parent="Overlay/StartScreen" unique_id=869643019]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.012, 0.025, 0.018, 0.8)
+
+[node name="Card" type="ColorRect" parent="Overlay/StartScreen" unique_id=366291729]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -355.0
+offset_top = -360.0
+offset_right = 355.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.035, 0.075, 0.052, 0.96)
+
+[node name="Title" type="Label" parent="Overlay/StartScreen/Card" unique_id=148234911]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 26.0
+offset_right = 678.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(0.97, 0.94, 0.8, 1)
+theme_override_colors/font_outline_color = Color(0.01, 0.02, 0.015, 0.95)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 31
+text = "WildBalance"
+horizontal_alignment = 1
+
+[node name="Guide" type="Label" parent="Overlay/StartScreen/Card" unique_id=692220032]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 91.0
+offset_right = 660.0
+offset_bottom = 640.0
+theme_override_colors/font_color = Color(0.87, 0.92, 0.8, 1)
+theme_override_colors/font_outline_color = Color(0.01, 0.02, 0.015, 0.9)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 16
+text = "YOU ARE THE FOREST STEWARD\n\nBalance four seasons to complete the run. Hold balance above 70% for 60 seconds and tend two different meadows every season. You have three reseeds per season.\n\nYOUR TOOLS\n1–8  Reseed a low-food meadow.\n−/=  Set the herd target (2–6 deer).\n[/]  Set the pack target (1–2 wolves).\nQ  Scare a hunting wolf (18-second cooldown).\nT  Start a fresh stewardship run.\n\nEXPLORE\nWASD  Pan. Right-drag  Look. Scroll  Zoom.\nV  Toggle free-fly: WASD moves, Space rises, Shift descends, scroll changes speed.\nF  Follow a deer. R  Reset the camera. H  Hide the HUD.\n\nSEASONAL EVENTS\nSpring and autumn restore food quickly. Summer dry spells and winter frost make early reseeding essential."
+autowrap_mode = 2
+
+[node name="Begin" type="Label" parent="Overlay/StartScreen/Card" unique_id=491029821]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 674.0
+offset_right = 678.0
+offset_bottom = 716.0
+theme_override_colors/font_color = Color(1, 0.89, 0.55, 1)
+theme_override_colors/font_outline_color = Color(0.01, 0.02, 0.015, 0.95)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 20
+text = "PRESS ENTER OR SPACE TO BEGIN"
+horizontal_alignment = 1
